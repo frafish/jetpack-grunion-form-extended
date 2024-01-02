@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: JetPack Form Extended
+Plugin Name: Jetpack Form Extended
 Description: Add a contact form to any post, page or text widget.  Emails will be sent to the post's author by default, or any email address you choose.  As seen on WordPress.com.
 Plugin URI: http://automattic.com/#
 AUthor: Automattic, Inc.

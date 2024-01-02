@@ -14,7 +14,7 @@ class Field_Hidden {
     //put your code here
     
     /**
-    * Render the url field.
+    * Render the Hidden field.
     *
     * @param array  $atts - the block attributes.
     * @param string $content - html content.

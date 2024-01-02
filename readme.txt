@@ -1,4 +1,4 @@
-=== JetPack Form Extended ===
+=== Jetpack Form Extended ===
 Contributors: frafish
 Tags: contact, form, email, grunion, jetpack
 Stable tag: 1

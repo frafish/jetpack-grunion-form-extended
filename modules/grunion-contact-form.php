@@ -30,23 +30,26 @@ class Grunion_Contact_Form_Extended {
         }, 10, 3);
 
         // FIELDS
-        $field = __DIR__ . DIRECTORY_SEPARATOR . 'contact-form' . DIRECTORY_SEPARATOR . 'fields' . DIRECTORY_SEPARATOR . 'hidden.php';
-        include_once $field;
-        Blocks::jetpack_register_block(
-                'jetpack/field-hidden',
-                array(
-                    'render_callback' => array(\Automattic\Jetpack\Forms\ContactForm\Field_Hidden::class, 'render_field'),
-                )
-        );
+        $fields = glob(__DIR__ . DIRECTORY_SEPARATOR . 'contact-form' . DIRECTORY_SEPARATOR . 'fields' . DIRECTORY_SEPARATOR . '*.php');
+        //foreach ($fields as $field) {
+            $field = __DIR__ . DIRECTORY_SEPARATOR . 'contact-form' . DIRECTORY_SEPARATOR . 'fields' . DIRECTORY_SEPARATOR . 'hidden.php';
+            include_once $field;
+            Blocks::jetpack_register_block(
+                    'jetpack/field-hidden',
+                    array(
+                        'render_callback' => array(\Automattic\Jetpack\Forms\ContactForm\Field_Hidden::class, 'render_field'),
+                    )
+            );
+        //}
         
         add_action('enqueue_block_editor_assets', function() {
             $plugin_url = plugin_dir_url(__DIR__ );
-            //$config = require_once EXTGUT_DIR . '/build/index.asset.php';
+            $config = require_once __DIR__ . DIRECTORY_SEPARATOR . 'contact-form'. DIRECTORY_SEPARATOR . 'editor.asset.php';
             wp_enqueue_script(
                 'jetpack-contact-form-extended',
                 $plugin_url . 'modules/contact-form/index.js',
-                //$config['dependencies'],
-                //$config['version']
+                $config['dependencies'],
+                $config['version']
             );
         });
     }
