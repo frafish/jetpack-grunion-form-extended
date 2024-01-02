@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: JetPack Grunion Contact Form Extended
+Plugin Name: JetPack Form Extended
 Description: Add a contact form to any post, page or text widget.  Emails will be sent to the post's author by default, or any email address you choose.  As seen on WordPress.com.
 Plugin URI: http://automattic.com/#
 AUthor: Automattic, Inc.
@@ -13,16 +13,9 @@ License: GPLv3 or later
 add_action( 'plugins_loaded', function() {
     $jetpack_form_dir = 'JETPACK__PLUGIN_DIR'; // GRUNION_PLUGIN_DIR
     if ( defined( $jetpack_form_dir ) ) {
-        // TODO
-        //https://developer.jetpack.com/module/contact-form/
-        add_filter('render_block',  function($block_content, $parsed_block, $block) {
-            //var_dump($block->name);
-            if ($block->name == 'jetpack/contact-form') {
-                $block_content = str_replace('wp-block-jetpack-contact-form', 'wp-block-jetpack-contact-form wp-block-jetpack-contact-form-ext', $block_content);
-            }
-            //jetpack/field-
-            return $block_content;
-        }, 10, 3 );
+        $module = __DIR__.DIRECTORY_SEPARATOR.'modules'.DIRECTORY_SEPARATOR.'grunion-contact-form.php';
+        include_once $module;
+        $plugin = \Grunion_Contact_Form_Extended::init();
     } else {
         add_action( 'admin_notices', 'grunion_form_plugin_fail_load' );
     }

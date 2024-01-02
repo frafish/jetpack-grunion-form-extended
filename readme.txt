@@ -1,6 +1,6 @@
-=== Grunion Contact Form ===
-Contributors: frafish, automattic
-Tags: WordPress.com, contact form, email
+=== JetPack Form Extended ===
+Contributors: frafish
+Tags: contact, form, email, grunion, jetpack
 Stable tag: 1
 Requires at least: 6.0
 Tested up to: 6.4
