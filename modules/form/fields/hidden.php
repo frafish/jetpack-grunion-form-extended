@@ -11,7 +11,12 @@ use Automattic\Jetpack\Forms\ContactForm\Contact_Form_Plugin;
  * @author Fra
  */
 class Field_Hidden {
-    //put your code here
+    
+    use Traits\Base_Field;
+    
+    public function get_name() {
+        return 'field-hidden';
+    }
     
     /**
     * Render the Hidden field.
@@ -21,8 +26,22 @@ class Field_Hidden {
     *
     * @return string HTML for the contact form field.
     */
-   public static function render_field( $atts, $content ) {
-           $atts = Contact_Form_Plugin::block_attributes_to_shortcode_attributes( $atts, 'hidden' );
-           return Contact_Form::parse_contact_field( $atts, $content );
+   public function render_field( $atts, $content ) {
+           //$atts = Contact_Form_Plugin::block_attributes_to_shortcode_attributes( $atts, 'hidden' );
+           //var_dump($atts);
+           ob_start();
+           $name = !empty($atts['id']) ? sanitize_title($atts['id']) : 'field'.wp_generate_password(4, false);
+           $id = 'field-'.$name;
+           $default = empty($atts['value']) ? '' : $atts['value'];
+           ?>
+           <input type="hidden" name="<?php echo $name; ?>" id="<?php echo $id; ?>" value="<?php echo $default; ?>" class="hidden <?php echo $this->get_input_classes(); ?>">
+           <?php
+           $block = ob_get_clean();
+           return $block;
+           //return Contact_Form::parse_contact_field( $atts, $content );
    }
+   
+   
+   
+   
 }

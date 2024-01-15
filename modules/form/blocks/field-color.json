@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "jetpack/field-color",
+    "title": "Field Color",
+    "category": "contact-form",
+    "parent": [ "jetpack/contact-form", "core/form" ],
+    "icon": "dashicons dashicons-art",
+    "description": "An Color Picker Form field.",
+    "keywords": [ "field", "color" ],
+    "version": "1.0.1",
+    "textdomain": "jetpack",
+    "attributes": {
+        "value": {
+            "type": "string",
+            "label": "Value",
+            "help": "The default value.",
+            "jsource": "attribute",
+            "jselector": "input",
+            "jattribute": "value"
+        },
+        "id": {
+            "type": "string",
+            "label": "Name",
+            "help": "Affects the 'name' atribute of the input element, and is used as a name for the form submission results. Customize the input's name/ID. Only alphanumeric, dash and underscore characters are allowed",
+            "panel": "advanced",
+            "sanitize": "title",
+            "source": "attribute",
+            "selector": "input",
+            "attribute": "id"
+        }
+    }
+}
