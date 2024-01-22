@@ -11,9 +11,30 @@
     "version": "1.0.1",
     "textdomain": "jetpack",
     "attributes": {
+        "label": {
+            "type": "string",
+            "label": "Label",
+            "default": "Color",
+            "panel": "inline",
+            "control": "RichText",
+            "tag": "label",
+            "placeholder": "Color",
+            "className": "grunion-field-label wp-block-form-input__label"
+        },
+        "inline": {
+            "type": "boolean",
+            "label": "Inline label"
+        },
+        "required": {
+            "type": "boolean",
+            "label": "Required",
+            "source": "attribute",
+            "selector": "input",
+            "attribute": "required"
+        },
         "value": {
             "type": "string",
-            "label": "Value",
+            "label": "Default Value",
             "help": "The default value.",
             "jsource": "attribute",
             "jselector": "input",
@@ -28,6 +49,16 @@
             "source": "attribute",
             "selector": "input",
             "attribute": "id"
+        },
+        "width": {
+            "type": "number",
+            "label": "Width",
+            "control": "SelectControl",
+            "options": { "25": 25, "33": 33, "50": 50, "66": 66, "75": 75, "100": 100 },
+            "default": 100,
+            "tab": "styles",
+            "panel": "style"
         }
+        
     }
 }

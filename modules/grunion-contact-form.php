@@ -123,6 +123,19 @@ class Grunion_Contact_Form_Extended {
                     $field_obj->_edit();
                 }, 99);
             });
+            
+            $field = __DIR__ . DIRECTORY_SEPARATOR . 'form' . DIRECTORY_SEPARATOR . 'fields' . DIRECTORY_SEPARATOR . 'color.php';
+            include_once $field;
+            $field_obj = new \Automattic\Jetpack\Forms\ContactForm\Field_Color();
+            Blocks::jetpack_register_block(
+                    $field_obj->get_jetpack_key(),
+                    $field_obj->get_args()
+            );
+            add_action('enqueue_block_editor_assets', function() use ($field_obj) {
+                add_action( 'admin_print_footer_scripts',  function() use ($field_obj) {
+                    $field_obj->_edit();
+                }, 99);
+            });
         //}
         
         add_action('enqueue_block_editor_assets', function() {

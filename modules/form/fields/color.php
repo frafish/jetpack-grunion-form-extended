@@ -12,10 +12,17 @@ use Automattic\Jetpack\Forms\ContactForm\Contact_Form_Plugin;
  */
 class Field_Color {
 
-    use Trait\Base_Field;
+    use Traits\Base_Field;
 
     public function get_name() {
         return 'field-color';
+    }
+    
+    public function get_field_wrapper_open($name, $atts) {
+        $width = empty($atts['width']) ? '100' : $atts['width'];
+        ?>
+        <div class="wp-block-form-input test-<?php echo $name; ?> grunion-field-<?php echo $name; ?>-wrap grunion-field-wrap<?php echo (empty($width) || $width == 100) ? '' : ' grunion-field-width-'.$width.'-wrap jetpack-field__width-'.$width; ?>">
+        <?php
     }
 
     /**
@@ -28,17 +35,22 @@ class Field_Color {
      */
     public function render_field($atts, $content) {
         //$atts = Contact_Form_Plugin::block_attributes_to_shortcode_attributes( $atts, 'hidden' );
-        //var_dump($atts);
+        //var_dump($atts); die();
         ob_start();
-        $name = !empty($atts['id']) ? sanitize_title($atts['id']) : 'field' . wp_generate_password(4, false);
+        $name = !empty($atts['id']) ? sanitize_title($atts['id']) : strtolower(wp_generate_password(6, false));
         $id = 'field-' . $name;
         $default = empty($atts['value']) ? '' : $atts['value'];
-        $required = empty(atts['required']) ? '' : ' $required="" aria-required="true"';
-        ?>
-        <div class="wp-block-form-input test-abcd">
-            <label class="wp-block-form-input__label">
-                <span class="wp-block-form-input__label-content">Name</span>
-                <input type="color" name="<?php echo $name; ?>" id="<?php echo $id; ?>" value="<?php echo $default; ?>" class="<?php echo $this->get_input_classes(); ?>"<?php echo $required; ?>>
+        $required = empty($atts['required']) ? '' : ' $required="" aria-required="true"';
+        $inline = empty($atts['inline']) ? '' : ' is-label-inline';
+            $this->get_field_wrapper_open($name, $atts);
+            ?>
+            <label class="wp-block-form-input__label<?php echo $inline; ?> grunion-field-label label-<?php echo $name; ?>">
+                <?php if (!empty($atts['label']) && !$this->is_editor()) { ?>
+                    <span class="wp-block-form-input__label-content">
+                        <?php echo $atts['label']; if ($required) { echo ' <span class="grunion-label-required" aria-hidden="true">'.__('(required)').'</span>'; }?>
+                    </span>
+                <?php } ?>
+                <input style="width: 100%;" type="color" name="<?php echo $name; ?>" id="<?php echo $id; ?>" value="<?php echo $default; ?>" class="<?php echo $this->get_input_classes(); ?>"<?php echo $required; ?>>
             </label>
         </div>
         <?php
